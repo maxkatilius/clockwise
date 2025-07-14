@@ -1,9 +1,0 @@
-- reference time displayed and able to drop-down for date, time and location?
-- intitial load of user location takes a little while, not sure why at this stage.
-- save preset location set ups and name them 
-- change dropdown of reftime to be highlighted
-- make it visually obvious you can change location and time manually
-- smooth animations
-- nice background blur
-- add more famous cities in usa uk aus etc
-- home button that sets the location data to user data

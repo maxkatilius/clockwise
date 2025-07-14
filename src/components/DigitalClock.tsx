@@ -14,10 +14,10 @@ type Props = {
 }
 
 const sizeMap: Record<number, string> = {
-    1: "text-[1.55rem] md:text-[2rem] lg:text-[2rem] xl:text-[2.3rem]",
-    2: "text-[1.4rem] md:text-[1.65rem] lg:text-[2rem] xl:text-[2.2rem]",
+    1: "text-[1.55rem] md:text-[2rem] lg:text-[2.2rem] xl:text-[2.3rem]",
+    2: "text-[1.4rem] md:text-[1.65rem] lg:text-[2rem] xl:text-[2.3rem]",
     3: "text-[1rem] md:text-[1.25rem] lg:text-[1.7rem] xl:text-[2rem] lg:w-[7.5em]",
-    4: "text-[1.12rem] md:text-[1.5rem] lg:text-[1.6rem] xl:text-[1.75rem] lg:w-[7.5em]"
+    4: "text-[1rem] sm:text-[1.2rem] md:text-[1.5rem] lg:text-[1.6rem] xl:text-[1.9rem] lg:w-[7.5em]"
 }  
 
 const DigitalClock = ({

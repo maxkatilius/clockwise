@@ -82,24 +82,19 @@ const Home = () => {
   const atMax = locations.length >= MAX
   const atMin = locations.length <= MIN
 
-  const gridClass = (() => {
-    switch (locations.length) {
-      case 1:
-        return "grid-cols-1 lg:grid-cols-1"
-      case 2:
-        return "grid-cols-1 lg:grid-cols-2"
-      case 3:
-        return "grid-cols-1 lg:grid-cols-3"
-      case 4:
-        return "grid-cols-2 lg:grid-cols-4"
-      default:
-        return "grid-cols-1"
+  const getLayoutClass = () => {
+    if (locations.length === 4) {
+      return "grid grid-cols-2 gap-6 xl:gap-10 justify-items-center items-start"
+    }
+    if (locations.length === 2 || locations.length === 3) {
+      return "flex flex-col lg:flex-row justify-evenly items-center h-full"
+    }
+    return "flex flex-col justify-evenly items-center h-full"
   }
-  })()
 
   return (
     <main className="
-      grow flex flex-col flex-1
+      grow flex flex-col
       w-full px-[1.5em] lg:px-[2em] lg:py-[0.5em] overflow-y-auto
     ">
       {showIntroModal && (
@@ -176,12 +171,11 @@ const Home = () => {
             </button>
         </div>
       </div>
-      <div className="grow flex items-center">
+      <div className="grow flex justify-center items-center">
         <div className={`
           clockCardsContainer
-          w-full py-[0.5em]
-          grid ${gridClass} auto-rows-max justify-items-center 
-          ${locations.length === 4 ? "gap-[1em] md:gap-[2em] lg:gap-[0.5em] lg:pb-[1.4em]" : locations.length === 3 ? "gap-[1.25em] md:gap-[1em] lg:gap-[1.8em] xl:gap-[2em]" : "gap-[1.2em] md:gap-[2em]"}
+          w-full 
+          ${getLayoutClass()} 
         `}>
           {locations.map((searchKey, idx)=> (
             <ClockCard
