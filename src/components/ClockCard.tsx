@@ -133,7 +133,7 @@ const ClockCard = ({
       {timezone.length > 0 && typeof utcOffset === "number" ? (
         <section className={`
           h-full
-          flex flex-col items-center ${locations.length === 4 ? "justify-between gap-[1em] lg:gap-[1.4em]" : locations.length === 3 ? "gap-[0.4em] md:gap-[0.6em]" : "gap-[0.7em] lg:gap-[1em]"}
+          flex flex-col items-center ${locations.length === 4 ? "justify-between gap-[1em]" : locations.length === 3 ? "gap-[0.4em] md:gap-[0.6em]" : "gap-[0.7em] lg:gap-[1em]"}
         `}>
           <Location
             idx={idx}
