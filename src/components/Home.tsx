@@ -123,7 +123,7 @@ const Home = () => {
       <div className="
         btns-container
         flex justify-between w-full 
-        pb-[0.6em] pt-[0.8em] md:pt-[1em] lg:pt-[1.2em]
+        pb-[0.6em] pt-[0.8em] md:pt-[1em] 
         ">
         <div className="
           add-minus-btns
