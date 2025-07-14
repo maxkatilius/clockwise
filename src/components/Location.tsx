@@ -70,28 +70,25 @@ const Location = ({ idx, utcOffset, searchKey, locations, setLocations }: Props)
     const count = Math.min(locations.length, 8)
     const textSize = sizeMap[count] || sizeMap[8]
     const utcTextSize = utcSizeMap[count] || sizeMap[8]
+    const sharedFieldClass = `
+    relative
+    w-full px-[0.8em] py-[0.6em]
+    font-[600] ${textSize} text-center
+    rounded-xl truncate
+    leading-none
+    min-h-[2.75rem]`
 
     // Display mode
     return (
         <div
             className={`
-                relative ${locations.length === 4 || locations.length === 1 ?  "w-full sm:w-auto sm:px-2 2xl:w-full 2xl:px-0" : ""}
+                ${locations.length === 4 || locations.length === 1 ?  "w-full sm:w-auto sm:px-2 2xl:w-full 2xl:px-0" : ""}
                 flex flex-col justify-center items-center
                 tracking-wide
             `}
         >
-            {!editing ? (
-                <button
-                    onClick={() => setEditing(true)}
-                    className={`
-                        w-full px-[0.8em] py-[0.4em] 
-                        font-[600] ${textSize} 
-                        rounded-xl block truncate overflow-hidden text-ellipsis 
-                        hover:cursor-pointer hover:scale-[1.05] hover:bg-white/20 transition-all duration-400 ease-in-out
-                `}>
-                    {city}, {country}
-                </button>
-            ) : (
+        {editing ? (
+            <div className="relative w-full">
                 <input
                     ref={inputRef}
                     value={query}
@@ -125,34 +122,36 @@ const Location = ({ idx, utcOffset, searchKey, locations, setLocations }: Props)
                         }, 100)
                     }}
                     placeholder="Search for a city..."
-                    className={`
-                        w-full px-[0.8em] py-[0.4em] 
-                        font-[600] ${textSize} text-center
-                        bg-white rounded-xl truncate border border-gray-400
-                    `}
+                    className={`${sharedFieldClass} bg-white focus:ring-0`}
                 />
-            )}
+                {matches.length > 0 && (
+                    <ul className="absolute top-full left-0 z-10 w-full overflow-y-auto bg-white border rounded-lg shadow-lg max-h-60">
+                        {matches.map((key, idx) => {
+                            const [c, cn] = key.split(", ")
+                            const isActive = idx === highlightedIndex
+                            return (
+                                <li
+                                    key={key}
+                                    className={`cursor-pointer px-3 py-2 ${isActive ? "bg-pink-200" : "hover:bg-purple-100"}`}
+                                    onMouseEnter={() => setHighlightedIndex(idx)}
+                                    onClick={() => chooseSearchKey(key)}
+                                >
+                                    {capitaliseString(c)}, {capitaliseString(cn)}
+                                </li>
+                            )
+                        })}
+                    </ul>
+                )}
+            </div>
+        ) : ( <button
+                onClick={() => setEditing(true)}
+                className={`${sharedFieldClass} bg-transparent hover:cursor-pointer hover:scale-[1.05] hover:bg-white/20 transition-all duration-400 ease-in-out`}>
+                {city}, {country}
+            </button>
+        )}
             <span className={`font-[500] ${utcTextSize} mt-1`}>
                 {utcOffset !== null ? formatTimezoneString(utcOffset) : "..."}
             </span>
-            {editing && matches.length > 0 && (
-                <ul className="absolute top-full left-0 z-10 w-full mt-1 overflow-y-auto bg-white border rounded-lg shadow-lg max-h-60">
-                    {matches.map((key, idx) => {
-                        const [c, cn] = key.split(", ")
-                        const isActive = idx === highlightedIndex
-                        return (
-                            <li
-                                key={key}
-                                className={`cursor-pointer px-3 py-2 ${isActive ? "bg-pink-200" : "hover:bg-purple-100"}`}
-                                onMouseEnter={() => setHighlightedIndex(idx)}
-                                onClick={() => chooseSearchKey(key)}
-                            >
-                                {capitaliseString(c)}, {capitaliseString(cn)}
-                            </li>
-                        )
-                    })}
-                </ul>
-            )}
         </div>
     )
 }
