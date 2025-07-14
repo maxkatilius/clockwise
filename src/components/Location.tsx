@@ -13,7 +13,7 @@ type Props = {
 
 const sizeMap: Record<number, string> = {
     1: "text-[1.8rem]/3 md:text-[2.2rem]/6 lg:text-[2.5rem]/6 xl:text-[2.9rem]/10",
-    2: "text-[1.4rem]/2 md:text-[1.75rem]/5 lg:text-[2.2rem]/6 xl:text-[2.7rem]/8",
+    2: "text-[1.4rem]/2 md:text-[1.75rem]/4 lg:text-[2.2rem]/6 xl:text-[2.7rem]/8",
     3: "text-[1.15rem]/2 md:text-[1.4rem]/4 lg:text-[1.6rem]/4 xl:text-[2rem]/6",
     4: "text-[1rem]/2 sm:text-[1.3rem]/2 md:text-[1.55rem]/4 lg:text-[1.8rem]/4 xl:text-[2.1rem]/6"
 } 
@@ -72,11 +72,10 @@ const Location = ({ idx, utcOffset, searchKey, locations, setLocations }: Props)
     const utcTextSize = utcSizeMap[count] || sizeMap[8]
     const sharedFieldClass = `
     relative
-    w-full px-[0.8em] py-[0.6em]
+    w-full px-[0.8em] py-1
     font-[600] ${textSize} text-center
     rounded-xl truncate
-    leading-none
-    min-h-[2.75rem]`
+    leading-none`
 
     // Display mode
     return (
@@ -149,7 +148,7 @@ const Location = ({ idx, utcOffset, searchKey, locations, setLocations }: Props)
                 {city}, {country}
             </button>
         )}
-            <span className={`font-[500] ${utcTextSize} mt-1`}>
+            <span className={`font-[500] ${utcTextSize}`}>
                 {utcOffset !== null ? formatTimezoneString(utcOffset) : "..."}
             </span>
         </div>

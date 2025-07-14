@@ -64,6 +64,10 @@ const DigitalClock = ({
 
     // useEffects
 
+    // useEffect(() => {
+    //     updateRefTime()
+    // }, [utcOffset])
+
     useEffect(() => {
         if (!timezone) return 
         const timestamp = isNow ? now : refTimestamp
@@ -73,7 +77,7 @@ const DigitalClock = ({
         setDisplaySeconds(displayTime.slice(6,8))
         setDisplayAmPm(displayTime.slice(9,11))
         
-    }, [now, isNow, is24h, refTimestamp])
+    }, [now, isNow, is24h, refTimestamp, timezone, utcOffset])
 
     useEffect(() => {
         if (!isNow && displayHours && displayMinutes && displaySeconds && (is24h || displayAmPm)) {
