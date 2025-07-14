@@ -13,14 +13,14 @@ type Props = {
 
 const sizeMap: Record<number, string> = {
     1: "text-[1.8rem]/3 md:text-[2.2rem]/6 lg:text-[2.5rem]/6 xl:text-[2.9rem]/10",
-    2: "text-[1.35rem]/2 md:text-[1.75rem]/4 lg:text-[2.2rem]/6 xl:text-[2.7rem]/8",
+    2: "text-[1.35rem]/2 md:text-[1.75rem]/4 lg:text-[1.9rem]/10 xl:text-[2.7rem]/8",
     3: "text-[1.15rem]/2 md:text-[1.4rem]/4 lg:text-[1.6rem]/4 xl:text-[2rem]/6",
     4: "text-[1rem]/2 sm:text-[1.3rem]/2 md:text-[1.55rem]/4 lg:text-[1.8rem]/4 xl:text-[2.1rem]/6"
 } 
 
 const utcSizeMap: Record<number, string> = {
     1: "text-[1.55rem] md:text-[1.9rem] lg:text-[2.1rem] xl:text-[2.2rem]",
-    2: "text-[1.15rem] md:text-[1.45rem] lg:text-[1.9rem] xl:text-[2.2rem]",
+    2: "text-[1.15rem] md:text-[1.45rem] lg:text-[1.7rem] xl:text-[2.2rem]",
     3: "text-[1rem] md:text-[1.15rem] lg:text-[1.5rem] xl:text-[1.7rem]",
     4: "text-[0.85rem] sm:text-[1rem] md:text-[1.3rem] lg:text-[1.7rem] xl:text-[1.6rem]"
 }
