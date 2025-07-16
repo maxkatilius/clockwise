@@ -2,6 +2,7 @@ import { useState, useEffect } from "react"
 import { IoIosClose } from "react-icons/io"
 import { IoHomeSharp } from "react-icons/io5"
 import { FaSpinner } from "react-icons/fa"
+import TimePicker from "./TimePicker.tsx"
 
 
 import { getCityData, getClosestCityData } from "../utils"
@@ -160,6 +161,7 @@ const ClockCard = ({
             utcOffset={utcOffset}
             locations={locations}
           />
+          <TimePicker />
         </section>
       ) : (
         <p>Loading timezone info...</p>

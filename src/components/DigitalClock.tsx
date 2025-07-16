@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react"
+// import TimePicker from "./TimePicker.tsx"
 import { formatUtcTimestampToDate } from "../utils.ts"
+
 
 type Props = {
     now: number
@@ -33,12 +35,12 @@ const DigitalClock = ({
 }: Props) => {
 
     // state
-
+ 
     const [displayHours, setDisplayHours] = useState<string>("")
     const [displayMinutes, setDisplayMinutes] = useState<string>("")
     const [displaySeconds, setDisplaySeconds] = useState<string>("")
     const [displayAmPm, setDisplayAmPm] = useState<string>("")
-    
+
     // handlers
 
     const updateRefTime = () => {
@@ -63,10 +65,6 @@ const DigitalClock = ({
     }
 
     // useEffects
-
-    // useEffect(() => {
-    //     updateRefTime()
-    // }, [utcOffset])
 
     useEffect(() => {
         if (!timezone) return 
@@ -192,6 +190,7 @@ const DigitalClock = ({
                 <option>PM</option>
             </select>
         )}
+        {/* <TimePicker /> */}
     </div>
 
         
