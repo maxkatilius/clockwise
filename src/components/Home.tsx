@@ -95,10 +95,11 @@ const Home = () => {
   return (
     <main className="
       grow flex flex-col
-      w-full px-[1.5em] lg:px-[2em] lg:py-[0.5em] overflow-y-auto
+      w-full 
+      px-[1.5em] lg:px-[2em] lg:py-[0.5em] overflow-y-auto
     ">
       {showIntroModal && (
-        <div className="fixed inset-0 bg-transparent bg-opacity-80 backdrop-blur-sm flex items-center justify-center z-101">
+        <div className="fixed inset-0 bg-transparent bg-opacity-80 backdrop-blur-sm flex items-center justify-center z-110">
           <div className="flex flex-col gap-4 py-8 px-10 bg-white rounded-xl shadow-lg w-[80%] sm:w-[60%] md:w-[50%] lg:w-[30%] xl:w-[25%] text-gray-800">
             <h2 className="text-center text-3xl font-bold mb-2">Welcome!</h2>
             <p className="mb-4">Tap the city name to change location, and tap the time to set a custom time.</p>
@@ -174,7 +175,7 @@ const Home = () => {
       <div className="grow flex justify-center items-center">
         <div className={`
           clockCardsContainer
-          w-full 
+          w-full max-w-[90rem] 2xl:max-w-[80rem]
           ${getLayoutClass()} 
         `}>
           {locations.map((searchKey, idx)=> (

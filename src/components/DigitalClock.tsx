@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react"
-// import TimePicker from "./TimePicker.tsx"
 import { formatUtcTimestampToDate } from "../utils.ts"
-
+import TimePicker from "./TimePicker.tsx"
 
 type Props = {
     now: number
@@ -18,8 +17,8 @@ type Props = {
 const sizeMap: Record<number, string> = {
     1: "text-[1.55rem] md:text-[2rem] lg:text-[2.2rem] 2xl:text-[2.3rem]",
     2: "text-[1.35rem] md:text-[1.65rem] lg:text-[1.9rem] 2xl:text-[2.3rem]",
-    3: "text-[1rem] md:text-[1.25rem] lg:text-[1.7rem] 2xl:text-[2rem] lg:w-[7.5em]",
-    4: "text-[1rem] sm:text-[1.2rem] md:text-[1.5rem] lg:text-[1.6rem] 2xl:text-[1.9rem] lg:w-[7.5em]"
+    3: "text-[1rem] md:text-[1.25rem] lg:text-[1.7rem] 2xl:text-[2rem] w-[9em] lg:w-[7.5em]",
+    4: "text-[1rem] sm:text-[1.2rem] md:text-[1.5rem] lg:text-[1.6rem] 2xl:text-[1.9rem] md:w-[9em] lg:w-[8em]"
 }  
 
 const DigitalClock = ({
@@ -31,15 +30,17 @@ const DigitalClock = ({
     setRefTimestamp,
     timezone,
     utcOffset,
-    locations
+    locations,
 }: Props) => {
+    
 
     // state
  
     const [displayHours, setDisplayHours] = useState<string>("")
     const [displayMinutes, setDisplayMinutes] = useState<string>("")
     const [displaySeconds, setDisplaySeconds] = useState<string>("")
-    const [displayAmPm, setDisplayAmPm] = useState<string>("")
+    const [displayPeriod, setDisplayPeriod] = useState<string>("")
+    const [isEditing, setIsEditing] = useState<boolean>(false)
 
     // handlers
 
@@ -52,8 +53,8 @@ const DigitalClock = ({
             const day      = manualDate.getUTCDate()
             const h        = Number(displayHours)
             let h24        = h
-            if (displayAmPm === "PM" && h !== 12) h24 = h + 12
-            if (displayAmPm === "AM" && h === 12) h24 = 0
+            if (displayPeriod === "PM" && h !== 12) h24 = h + 12
+            if (displayPeriod === "AM" && h === 12) h24 = 0
 
             const utcOffsetMs = utcOffset * 60 * 60 * 1000
 
@@ -73,23 +74,21 @@ const DigitalClock = ({
         setDisplayHours(displayTime.slice(0, 2))
         setDisplayMinutes(displayTime.slice(3,5))
         setDisplaySeconds(displayTime.slice(6,8))
-        setDisplayAmPm(displayTime.slice(9,11))
+        setDisplayPeriod(displayTime.slice(9,11))
         
     }, [now, isNow, is24h, refTimestamp, timezone, utcOffset])
 
     useEffect(() => {
-        if (!isNow && displayHours && displayMinutes && displaySeconds && (is24h || displayAmPm)) {
+        if (!isNow && displayHours && displayMinutes && displaySeconds && (is24h || displayPeriod)) {
           updateRefTime()
         }
-      }, [displayHours, displayMinutes, displaySeconds, displayAmPm])
-    
+      }, [displayHours, displayMinutes, displaySeconds, displayPeriod])
 
     // element creating logic
 
     const hoursOptions = []
-    const hoursOptions24 = []
+    const hours24Options = []
     const minutesOptions = []
-    const secondsOptions = []
 
     for (let i = 0; i < 12; i++) {
         const hour = (i + 1).toString().padStart(2, '0')
@@ -102,7 +101,7 @@ const DigitalClock = ({
 
     for (let i = 0; i < 24; i++) {
         const hour = (i).toString().padStart(2, '0')
-        hoursOptions24.push(
+        hours24Options.push(
          <option key={hour} value={hour}>
              {hour}
          </option>
@@ -111,16 +110,10 @@ const DigitalClock = ({
  
     for (let i = 0; i < 60; i++) {
         const minute = (i).toString().padStart(2, '0')
-        const second = (i).toString().padStart(2, '0')
         minutesOptions.push(
         <option key={minute} value={minute}>
             {minute}
         </option>
-        )
-        secondsOptions.push(
-            <option key={second} value={second}>
-                {second}
-            </option>
         )
     }
 
@@ -128,72 +121,63 @@ const DigitalClock = ({
 
     const count = Math.min(locations.length, 8)
     const textSize = sizeMap[count] || sizeMap[8]
-
+    
     return (
-    <div 
-        className={`
-            flex items-center justify-center gap-2 w-[8em]
-            ${textSize} tracking-wider
-            bg-white/20 backdrop-blur-sm rounded-lg
-            shadow-inner shadow-blue-100
-            hover:scale-[1.05]
-            transition-all duration-300 ease-in-out 
-        `}
-        onClick={() => setIsNow(false)}
-    >
-        <span className="inline-flex lg:py-[0.15em] space-x-1 tracking-wide cursor-pointer">
-            <select 
-                value={displayHours}
-                className="appearance-none cursor-pointer"
-                onChange={(e) => {
+        <>
+            <div 
+                className={`
+                    relative ${isEditing ? "z-103" : "z-0"}
+                    flex items-center justify-center gap-2 w-[8em]
+                    ${textSize} tracking-wider
+                    bg-white/20 backdrop-blur-sm rounded-lg
+                    shadow-inner shadow-blue-100
+                    hover:scale-[1.05]
+                    transition-all duration-300 ease-in-outs 
+                    `}
+                onClick={() => {
                     setIsNow(false)
-                    setDisplayHours(e.target.value)
-                    setDisplaySeconds('00')
-                }}
-                >
-                {is24h ? hoursOptions24 : hoursOptions}
-            </select>
-            :
-            <select 
-                value={displayMinutes}
-                className="appearance-none cursor-pointer"
-                onChange={(e) => {
-                    setIsNow(false)
-                    setDisplayMinutes(e.target.value)
-                    setDisplaySeconds('00')
-                }}
-                >
-                {minutesOptions}
-            </select>
-            :
-            <select 
-                value={displaySeconds}
-                className="appearance-none cursor-pointer"
-                onChange={(e) => {
-                    setIsNow(false)
-                    setDisplaySeconds(e.target.value)
-                }}
-                >
-                {secondsOptions}
-            </select>
-        </span>
-        {!is24h && (
-            <select 
-            value={displayAmPm}
-            className={`appearance-none cursor-pointer`}
-            onChange={(e) => {
-                setIsNow(false)
-                    setDisplayAmPm(e.target.value)
+                    setIsEditing(true)
                 }}
             >
-                <option>AM</option>
-                <option>PM</option>
-            </select>
-        )}
-        {/* <TimePicker /> */}
-    </div>
-
-        
+                <span className="inline-flex lg:py-[0.15em] tracking-wide cursor-pointer transition-[width] duration-300 ease-in-out">
+                    {/* <span className="inline-flex space-x-1 items-baseline"> */}
+                    <p className="whitespace-pre">{displayHours} : {displayMinutes}</p>
+                    <p className="whitespace-pre"> : {displaySeconds}</p>
+                    {!is24h && <p className="ml-3">{displayPeriod}</p>}
+                </span>
+            </div>
+            {isEditing && (
+            <div 
+                className={`
+                    fixed inset-0 z-110
+                    flex items-center justify-center 
+                    bg-white/20 backdrop-blur-sm
+                    transition-opacity duration-300 ease-in-out
+                `}
+                onClick={(e) => {
+                    e.stopPropagation()
+                }}
+            >
+                <div 
+                    className="w-[20em]"
+                    onClick={(e) => e.stopPropagation()}
+                >
+                    <TimePicker 
+                        is24h={is24h}
+                        displayHours={displayHours}
+                        setDisplayHours={setDisplayHours}
+                        displayMinutes={displayMinutes}
+                        setDisplayMinutes={setDisplayMinutes}
+                        displayPeriod={displayPeriod}
+                        setDisplayPeriod={setDisplayPeriod}
+                        setDisplaySeconds={setDisplaySeconds}
+                        setIsEditing={setIsEditing}
+                        setIsNow={setIsNow}
+                />
+                </div>
+            </div>
+            )}
+        </>
     )
 }
 

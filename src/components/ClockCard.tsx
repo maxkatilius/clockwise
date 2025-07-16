@@ -2,8 +2,6 @@ import { useState, useEffect } from "react"
 import { IoIosClose } from "react-icons/io"
 import { IoHomeSharp } from "react-icons/io5"
 import { FaSpinner } from "react-icons/fa"
-import TimePicker from "./TimePicker.tsx"
-
 
 import { getCityData, getClosestCityData } from "../utils"
 
@@ -41,8 +39,6 @@ const ClockCard = ({
   userCity
 }: Props) => {
 
-  console.log(`clockCard rendered for ${searchKey} - location granted === ${locationGranted}`)
-
   // state
   
   const [utcOffset, setUtcOffset] = useState<number | null>(null)
@@ -69,8 +65,8 @@ const ClockCard = ({
     <div className={`
       clockCard
       relative 
-      w-full max-w-[30em] p-2 py-4 xl:p-8 2xl:p-10
-      ${locations.length === 1 ? "lg:max-w-[28em] xl:max-w-[30em] 2xl:max-w-[34em]" : locations.length === 2 ? "sm:max-w-[24em] lg:max-w-[45%] xl:max-w-[40%]" : locations.length === 3 ? "sm:max-w-[20em] lg:max-w-[30%]" : "md:max-w-[95%] lg:max-w-[100%] 2xl:max-w-[95%]" }
+      w-full max-w-[30em] p-2 py-4 xl:py-6 xl:px-0
+      ${locations.length === 1 ? "lg:max-w-[28em] xl:max-w-[30em] 2xl:max-w-[34em]" : locations.length === 2 ? "sm:max-w-[24em] lg:max-w-[45%] xl:max-w-[45%]" : locations.length === 3 ? "sm:max-w-[20em] lg:max-w-[30%]" : "md:max-w-[95%] lg:max-w-[100%] 2xl:max-w-[26em]" }
       bg-gradient-to-br from-sky-200 to-blue-400 rounded-xl shadow-md shadow-blue-300 
     `}>
       <div 
@@ -94,7 +90,7 @@ const ClockCard = ({
         <div 
         className={`
           homeIcon
-          absolute z-100 top-[0.4em] left-[0.45em]
+          absolute z-100 bottom-[0.4em] left-[0.5em]
           text-[0.9rem] md:text-[1.2rem] cursor-pointer 
           ${isUserLocation ? "opacity-90" : "opacity-20"}
           hover:scale-[1.1] hover:text-blue-900 hover:opacity-100 transition-all duration-500 ease-in-out
@@ -134,7 +130,7 @@ const ClockCard = ({
       {timezone.length > 0 && typeof utcOffset === "number" ? (
         <section className={`
           h-full
-          flex flex-col items-center ${locations.length === 4 ? "justify-between gap-[0.5em]" : locations.length === 3 ? "gap-[0.4em] md:gap-[0.6em]" : "gap-[0.7em] lg:gap-[1em]"}
+          flex flex-col items-center ${locations.length === 4 ? "justify-between gap-[0.5em]" : locations.length === 3 ? "gap-[0.5em] md:gap-[0.6em]" : "gap-[1.2em] lg:gap-[1em]"}
         `}>
           <Location
             idx={idx}
@@ -161,7 +157,6 @@ const ClockCard = ({
             utcOffset={utcOffset}
             locations={locations}
           />
-          <TimePicker />
         </section>
       ) : (
         <p>Loading timezone info...</p>
