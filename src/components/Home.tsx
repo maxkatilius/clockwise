@@ -124,7 +124,7 @@ const Home = () => {
       <div className="
         btns-container
         flex justify-between w-full 
-        pb-[0.6em] pt-[0.8em] md:pt-[1em] 
+        pb-[0.6em] pt-[0.8em] md:pt-[1em] xl:pt-[0.6em]
         ">
         <div className="
           add-minus-btns
@@ -175,7 +175,7 @@ const Home = () => {
       <div className="grow flex justify-center items-center">
         <div className={`
           clockCardsContainer
-          w-full max-w-[90rem] 2xl:max-w-[80rem]
+          w-full max-w-[100rem] ${locations.length === 4 ? "xl:max-w-[90rem]" : ""} 
           ${getLayoutClass()} 
         `}>
           {locations.map((searchKey, idx)=> (
