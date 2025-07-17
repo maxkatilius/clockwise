@@ -84,7 +84,7 @@ const Home = () => {
 
   const getLayoutClass = () => {
     if (locations.length === 4) {
-      return "grid grid-cols-2 gap-6 xl:gap-10 justify-items-center items-start"
+      return "grid grid-cols-2 gap-6 xl:gap-10 justify-items-center items-start 2xl:flex 2xl:justify-evenly 2xl:items-center 2xl:h-full 2xl:w-full"
     }
     if (locations.length === 2 || locations.length === 3) {
       return "flex flex-col lg:flex-row justify-evenly items-center h-full"
@@ -175,7 +175,7 @@ const Home = () => {
       <div className="grow flex justify-center items-center">
         <div className={`
           clockCardsContainer
-          w-full max-w-[100rem] ${locations.length === 4 ? "xl:max-w-[90rem]" : ""} 
+          w-full max-w-[100rem] 2xl:max-w-full ${locations.length === 4 ? "xl:max-w-auto" : ""} 
           ${getLayoutClass()} 
         `}>
           {locations.map((searchKey, idx)=> (

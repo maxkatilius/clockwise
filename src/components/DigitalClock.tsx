@@ -17,8 +17,8 @@ type Props = {
 const sizeMap: Record<number, string> = {
     1: "text-[1.55rem] md:text-[2rem] lg:text-[2.2rem] 2xl:text-[2.3rem]",
     2: "text-[1.35rem] md:text-[1.65rem] lg:text-[1.9rem] 2xl:text-[2.3rem]",
-    3: "text-[1rem] md:text-[1.25rem] lg:text-[1.7rem] 2xl:text-[2rem] w-[9em] lg:w-[7.5em]",
-    4: "text-[1rem] sm:text-[1.2rem] md:text-[1.5rem] lg:text-[1.6rem] 2xl:text-[1.9rem] md:w-[9em] lg:w-[8em]"
+    3: "text-[1rem] md:text-[1.25rem] lg:text-[1.7rem] 2xl:text-[2rem] w-[9em] lg:w-[7.5em] 2xl:w-[9em]",
+    4: "text-[1rem] sm:text-[1.2rem] md:text-[1.5rem] lg:text-[1.6rem] 2xl:text-[2rem] md:w-[9em] lg:w-[8em] 2xl:w-[9em]"
 }  
 
 const DigitalClock = ({
