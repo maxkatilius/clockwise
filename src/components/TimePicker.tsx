@@ -76,9 +76,13 @@ export default function TimePicker({
     minutesOptions.push({ label: minute, value: minute })
     }
 
-    // choose a per‑item height and pass it in:
-    const itemHeight = 40  // px
-    const visibleCount = 10
+    const itemHeight = 50 
+    const visibleCount = 14
+
+    const btnClass = `
+        w-full p-2 lg:p-3 lg:px-5 rounded-md
+        text-sm lg:text-md
+    `
 
     return (
         <WheelPickerWrapper className="flex items-center gap-2 bg-slate-50 border border-zinc-200 rounded-md shadow-md w-[8em] px-2">
@@ -125,13 +129,13 @@ export default function TimePicker({
             <div className="flex flex-col justify-center items-center gap-2">
                 <button
                     onClick={handleOk}
-                    className="w-full py-2 px-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 text-sm"
+                    className={`${btnClass} bg-blue-500 text-white hover:bg-blue-600`}
                 >
                     OK
                 </button>
                 <button
                     onClick={handleCancel}
-                    className="w-full py-2 px-2 bg-gray-300 text-black rounded-md hover:bg-gray-400 text-sm"
+                    className={`${btnClass} bg-gray-300 text-black hover:bg-gray-400`}
                 >
                     Cancel
                 </button>
