@@ -90,7 +90,7 @@ const ClockCard = ({
         <div 
         className={`
           homeIcon
-          absolute z-100 bottom-[0.4em] left-[0.5em]
+          absolute z-100 bottom-[0.6em] left-[0.6em]
           text-[0.9rem] md:text-[1.2rem] cursor-pointer 
           ${isUserLocation ? "opacity-90" : "opacity-20"}
           hover:scale-[1.1] hover:text-blue-900 hover:opacity-100 transition-all duration-500 ease-in-out

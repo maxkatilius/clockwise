@@ -69,10 +69,10 @@ const Home = () => {
   const buttonClass = `
     flex justify-center items-center
     px-[0.3em] pb-[0.2em] py-[0.15em] md:py-[0.25em] rounded-xl
-    bg-blue-400 shadow-sm shadow-blue-600
+    bg-gradient-to-br from-sky-200 to-blue-400 shadow-sm shadow-blue-600
     font-bold text-center tracking-wider
     cursor-pointer
-    hover:bg-blue-500 
+    hover:from-sky-300 hover:to-blue-500
     focus:ring-2 focus:outline-none focus:ring-blue-500 
     transition-colors duration-300 ease-in-out
     disabled:cursor-not-allowed disabled:opacity-70 disabled:hover:bg-sky-500 
