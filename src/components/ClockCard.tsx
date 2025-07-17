@@ -66,7 +66,7 @@ const ClockCard = ({
       clockCard
       relative 
       w-full max-w-[30em] p-2 py-4 xl:py-6 xl:px-0 2xl:py-8
-      ${locations.length === 1 ? "lg:max-w-[28em] xl:max-w-[30em] 2xl:max-w-[34em]" : locations.length === 2 ? "sm:max-w-[24em] lg:max-w-[45%] xl:max-w-[45%]" : locations.length === 3 ? "sm:max-w-[20em] lg:max-w-[30%]" : "md:max-w-[95%] lg:max-w-[100%] 2xl:max-w-[22%]" }
+      ${locations.length === 1 ? "lg:max-w-[28em] xl:max-w-[30em] 2xl:max-w-[34em]" : locations.length === 2 ? "sm:max-w-[24em] lg:max-w-[45%] xl:max-w-[45%]" : locations.length === 3 ? "sm:max-w-[20em] lg:max-w-[30%]" : "md:max-w-[95%] lg:max-w-[100%] 2xl:max-w-[25%]" }
       bg-gradient-to-br from-sky-200 to-blue-400 rounded-xl shadow-md shadow-blue-300 
     `}>
       <div 
