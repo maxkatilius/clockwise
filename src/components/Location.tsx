@@ -83,7 +83,7 @@ const Location = ({ idx, utcOffset, searchKey, locations, setLocations }: Props)
             className={`
                 flex flex-col justify-center items-center
                 w-full 
-                ${locations.length === 4 || locations.length === 1 ?  "sm:w-auto sm:px-2 2xl:w-full 2xl:px-0 gap-2 2xl:gap-5"  : locations.length === 3 ? "gap-0" : "gap-2 2xl:gap-5"}
+                ${locations.length === 4 || locations.length === 1 ?  "sm:w-auto sm:px-2 2xl:w-full 2xl:px-0 gap-1 2xl:gap-5"  : locations.length === 3 ? "gap-0 lg:gap-2 2xl:gap-4" : "gap-2 2xl:gap-5"}
                 tracking-wide
             `}
         >
